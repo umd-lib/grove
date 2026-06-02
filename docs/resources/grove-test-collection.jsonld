@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/"
+  },
+  "@graph": [
+    {
+      "@id": "http://example.com/grove-test#0001-TEST",
+      "dc:identifier": "0001-TEST",
+      "rdfs:label": "Test Term Without Handle"
+    },
+    {
+      "@id": "http://example.com/grove-test#0002-TEST",
+      "dc:identifier": "0002-TEST",
+      "rdfs:label": "Test Term With Handle (Charles L. Kades papers)",
+      "owl:sameAs": {
+        "@id": "http://hdl.handle.net/1903.1/42463"
+      }
+    }
+  ]
+}
