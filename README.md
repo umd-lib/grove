@@ -12,6 +12,11 @@ including:
 * [Load Predicates](docs/load_predicate.md)
 * [Vocabulary Model Timestamps](docs/VocabularyModelTimestamps.md)
 
+## Test Plan
+
+A basic test plan for verifying application functionality is provided in
+[docs/TestPlan.md](docs/TestPlan.md).
+
 ## Development Environment Setup
 
 * [VS Code Dev Container Setup](docs/DevelopmentEnvironmentVsCode.md)
