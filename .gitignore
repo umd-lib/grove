@@ -167,7 +167,8 @@ public/*
 **/grove*.crt
 **/grove*.key
 
-staticfiles
+staticfiles/*
+!staticfiles/.keep
 
 # Ruff cache
 .ruff_cache
