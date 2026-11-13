@@ -1,6 +1,16 @@
+[build-system]
+requires = ["setuptools>=77", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+platforms = ["any"]
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+
 [project]
 name = "grove"
-version = "1.1.1"
+dynamic = ["version"]
 requires-python = ">=3.14.9"
 dependencies = [
     "certifi>=2026.10.19",
@@ -13,17 +23,15 @@ dependencies = [
     "djangosaml2~=1.12",
     "django-umd-lib-style>=1.2.0",
     "plastron-utils~=4.8",
+    "psycopg2-binary~=2.9",
     "rdflib~=7.6",
     'urlobject~=2.4',
     "waitress~=3.0",
     "whitenoise~=6.12",
 ]
 
-[project.optional-dependencies]
-prod = [
-    "psycopg2-binary~=2.9",
-]
-test = [
+[dependency-groups]
+dev = [
     "debugpy~=1.8",
     "freezegun~=1.5",
     "pipdeptree~=2.35",

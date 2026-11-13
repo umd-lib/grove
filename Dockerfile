@@ -14,14 +14,15 @@ ENV PYTHONUNBUFFERED=1
 # Set work directory
 WORKDIR /opt/grove
 
-# Install dependencies
-COPY pyproject.toml .
-RUN pip install -e .[prod]
-
 # Copy project
-COPY src ./src
-COPY attribute-maps ./attribute-maps
-RUN pip install -e .[prod]
+# This all git tracked files will be copied, so that
+# the version can be derived without any git diffs
+COPY --exclude=.git . .
+
+# Temporarily mount the .git folder to infer the version during installation
+RUN --mount=source=.git,target=.git,type=bind \
+    pip install -e .
+
 RUN src/manage.py collectstatic
 
 # PORT

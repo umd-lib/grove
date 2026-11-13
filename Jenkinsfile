@@ -101,7 +101,7 @@ pipeline {
     stage('build') {
       steps {
         sh '''
-          pip install -e .[test]
+          pip install -e . --group dev
         '''
       }
     }
@@ -141,20 +141,6 @@ pipeline {
         }
       }
     }
-
-    stage('clean-workspace') {
-      steps {
-        // Change permissions of the workspace directory to world-writeable
-        // so Jenkins can delete it. This is needed, because files may be
-        // written to the directory from the Docker container as the "root"
-        // user, which Jenkins would not otherwise be able to clean up.
-        sh '''
-          chmod --recursive 777 $WORKSPACE
-        '''
-
-        cleanWs()
-      }
-    }
   }
 
   post {
@@ -162,6 +148,16 @@ pipeline {
       emailext to: "$DEFAULT_RECIPIENTS",
                subject: "$EMAIL_SUBJECT",
                body: "$EMAIL_CONTENT"
+
+      // Change permissions of the workspace directory to world-writeable
+      // so Jenkins can delete it. This is needed, because files may be
+      // written to the directory from the Docker container as the "root"
+      // user, which Jenkins would not otherwise be able to clean up.
+      sh '''
+        chmod --recursive 777 $WORKSPACE
+      '''
+
+      cleanWs()
     }
   }
 }
